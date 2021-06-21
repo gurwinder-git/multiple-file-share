@@ -2,6 +2,7 @@ import express from 'express';
 import path from 'path';
 import AdmZip from 'adm-zip';
 import FileModel from '../models/fileShareModel.js';
+import deleteExpiredLink from '../scripts/deleteExpiredLink.js';
 
 const router = express.Router();
 let zipper = new AdmZip();
@@ -40,6 +41,10 @@ router.post('/uploadFiles', async (req, res) => {
 
     const result = await document.save();
 
+    //delete Expired link
+    console.log(expireLinkTime * 60 * 60 * 1000)
+    setTimeout(() => {deleteExpiredLink()}, expireLinkTime * 60 * 60 * 1000);
+    
     // send response
     res.status(200).json({downloadFileLink: `${process.env.APP_BASE_URL}/download/${result._id}`});
 })
