@@ -1,11 +1,12 @@
 import express from 'express';
 import path from 'path';
 import AdmZip from 'adm-zip';
+import FileModel from '../models/fileShareModel.js';
 
 const router = express.Router();
-var zipper = new AdmZip();
+let zipper = new AdmZip();
 
-router.post('/uploadFiles', (req, res) => {
+router.post('/uploadFiles', async (req, res) => {
     const userFiles = req.files.userFiles;
     const expireLinkTime = req.body.expireLinkTime
 
@@ -16,19 +17,31 @@ router.post('/uploadFiles', (req, res) => {
 
     //convert files into zip and store on server
     let dataBuffer = null;
+    let zipSize = 0;
+
     for(let i = 0; i < userFiles.length; i++){
         dataBuffer = new Buffer(userFiles[i].data, 'utf-8');
         zipper.addFile(userFiles[i].name, dataBuffer); // (name of file inside zip, buffer)
+        zipSize += userFiles[i].size;
     }
     
-    let uniqueName = `${Date.now()}_${Math.round(Math.random() * 1E9)}.zip`;
+    const uniqueName = `${Date.now()}_${Math.round(Math.random() * 1E9)}.zip`;
     zipper.writeZip(`uploads/${uniqueName}`);
 
+    const path = uniqueName;
+
     //store file path in database
+    
+    const document = new FileModel({
+        fileName: uniqueName,
+        path: path,
+        size: zipSize
+    })
 
+    const result = await document.save();
 
-    //send response
-    res.send('ok')
+    // send response
+    res.status(200).json({downloadFileLink: `${process.env.APP_BASE_URL}/download/${result._id}`});
 })
 
 
