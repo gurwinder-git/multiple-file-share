@@ -13,6 +13,10 @@ const fileSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    linkExpireAt: {
+        type: Number,
+        required: true
+    },
     sender: {
         type: String,
         required: false

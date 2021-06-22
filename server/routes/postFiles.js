@@ -32,18 +32,17 @@ router.post('/uploadFiles', async (req, res) => {
     const path = uniqueName;
 
     //store file path in database
-    
     const document = new FileModel({
         fileName: uniqueName,
         path: path,
-        size: zipSize
+        size: zipSize,
+        linkExpireAt: Date.now() + ( expireLinkTime * 60 * 60 * 1000 )
     })
 
     const result = await document.save();
 
     //delete Expired link
-    console.log(expireLinkTime * 60 * 60 * 1000)
-    setTimeout(() => {deleteExpiredLink()}, expireLinkTime * 60 * 60 * 1000);
+    setTimeout(() => {deleteExpiredLink(result._id)}, expireLinkTime * 60 * 60 * 1000);
     
     // send response
     res.status(200).json({downloadFileLink: `${process.env.APP_BASE_URL}/download/${result._id}`});
