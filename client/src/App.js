@@ -1,14 +1,14 @@
 import React from 'react';
-import Home from './components/Home';
-import './css/App.css';
+import Upload from './components/Upload';
 import Download from './components/Download';
+import './css/App.css';
 import {Switch, Route} from "react-router-dom";
 
 function App() {
   return (<>
         <Switch>
             <Route exact path='/'>
-                <Home/>
+                <Upload/>
             </Route>
 
             <Route exact path='/download/:id'>

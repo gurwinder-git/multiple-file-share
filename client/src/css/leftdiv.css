@@ -1,0 +1,17 @@
+.fileShareZone{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px dashed rgb(180, 180, 180); */
+    border-radius: .5em;
+    background-color: rgb(41, 41, 41);
+    width:90%;
+    padding: 1rem;
+} 
+
+
+.leftDiv{
+    width: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

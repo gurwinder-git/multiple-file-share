@@ -1,0 +1,35 @@
+.rightDiv{
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.socialLinks{
+    /* position: fixed; */
+    width: 40px;
+    height: 33px;
+    background-color: rgb(41, 41, 41);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 150ms ease-in-out;
+}
+
+.socialLinks:hover{
+    width: 80px;
+    font-size: x-large;
+    height: 42px;
+    cursor: pointer;
+}
+ 
+.underLine{
+    border-bottom: 1px solid white;
+    width: 40px;
+    height: 1px;
+}
+
+.rightDiv a{
+    color: white;
+}

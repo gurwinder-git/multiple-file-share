@@ -1,0 +1,18 @@
+#uploadDiv{
+    display: grid;
+    grid-template-rows: 10vh 90vh;
+}
+
+.main{
+    display: flex;
+    flex-direction: row;
+}
+
+h3.logo {
+    display: flex;
+    align-items: center;
+    padding: 0em 3em;
+    letter-spacing: 1px;
+    background-color: rgb(41, 41, 41);
+}
+
