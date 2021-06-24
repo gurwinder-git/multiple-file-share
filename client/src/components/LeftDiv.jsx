@@ -6,7 +6,7 @@ import EmailSection from './leftdiv/EmailSection'
 function LeftDiv() {
     return (
         <div className="leftDiv">
-            <div className="fileShareZone">
+            <div className="fileShareAndEmail">
                 <DragDropSection/>
                 {/* <EmailSection/> */}
             </div>

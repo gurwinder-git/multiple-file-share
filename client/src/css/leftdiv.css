@@ -1,4 +1,4 @@
-.fileShareZone{
+.fileShareAndEmail{
     display: flex;
     flex-direction: column;
     /* border: 1px dashed rgb(180, 180, 180); */
@@ -6,6 +6,8 @@
     background-color: rgb(41, 41, 41);
     width:90%;
     padding: 1rem;
+    height: auto;
+    transition: 150ms ease-in-out;
 } 
 
 

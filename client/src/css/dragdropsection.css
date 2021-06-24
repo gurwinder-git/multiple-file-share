@@ -5,6 +5,25 @@
     justify-content: center;
     align-items: center;
     border-radius: .5em;
+    z-index: 100;
+}
+
+.dragZone {
+    width: 97%;
+    /* height: 171px; */
+    text-align: center;
+    border: 2px dashed #c1c1c1;
+    margin: 15px 17px;
+    padding: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 18px;
+    border-radius: .1em;
+    transition: 150ms ease-in-out;
+}
+
+.dragZone * {
+    pointer-events: none;
 }
 
 .dragDropSection h6 {
@@ -79,4 +98,18 @@
 #dragSpan{
     color: #4e74ff;
     cursor: pointer;
+}
+
+.dragEnterStyleOnValidInput{
+    /* cursor: vertical-text; */
+    border-color: green;
+    background-color: rgba(144, 238, 144, 0.137);
+    transition: 150ms ease-in-out;
+}
+
+.dragEnterStyleOnInvalidValidInput{
+    /* cursor: no-drop; */
+    border-color: darkred;
+    background-color: rgba(255, 0, 0, 0.137);
+    transition: 150ms ease-in-out;
 }
