@@ -5,11 +5,14 @@ import FileModel from '../models/fileShareModel.js';
 import deleteExpiredLink from '../scripts/deleteExpiredLink.js';
 
 const router = express.Router();
-let zipper = new AdmZip();
 
 router.post('/uploadFiles', async (req, res) => {
+    let zipper = new AdmZip();
+    
     const userFiles = req.files.userFiles;
     const expireLinkTime = req.body.expireLinkTime
+    // console.log(req.files.userFiles)
+    // console.log(req.body.expireLinkTime)
 
     //validate request
     if(!userFiles || !expireLinkTime){
