@@ -7,6 +7,10 @@
     border-radius: .5em;
     z-index: 100;
 }
+.disablesDivStyle{
+    pointer-events: none;
+    opacity: .5
+}
 
 .dragZone {
     width: 97%;
@@ -54,9 +58,8 @@
     background-color: #494949;
     border-radius: .2em;
 }
-#myBar {
+.myBar {
     border-radius: .2em;
-    width: 20%;
     height: 30px;
     background-color: #ffffff;
     text-align: center;

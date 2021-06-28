@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import '../../css/dragdropsection.css'
+import axios from 'axios'
+import {responseContext} from '../../App'
 // import UserMessage from '../messages/UserMessage'
 
 
@@ -9,6 +11,10 @@ function DragDropSection() {
     let [filesSize, setFilesSize] = useState(0)
     let [fileSizeError, setFileSizeError] = useState(false)
     let [exipreTime, setExipreTime] = useState(5)
+    let [progress, setProgress] = useState(0)
+
+    //response context
+    let {setResponse} = useContext(responseContext);
 
     function handelDragEnter(e){
         e.preventDefault()
@@ -75,13 +81,15 @@ function DragDropSection() {
     // }, [files])
 
     useEffect(() => {
-        setFilesSize(0)
+        let filesSizeVar = 0 
         for(let i=0; i< files.length; i++){
-            setFilesSize((pre) => pre + files[i].size)
+            filesSizeVar += files[i].size
         }
-        if(filesSize > (100 * 1024 * 1024)){
+        setFilesSize(filesSizeVar)
+
+        if(filesSizeVar > (100 * 1024 * 1024)){
             setFileSizeError(true)
-            setValidInput(false)   
+            setValidInput(false) 
         }else{
             setFileSizeError(false)
         }
@@ -107,8 +115,9 @@ function DragDropSection() {
     }
 
     async function handelBtnClick(e){
+        setResponse({})
         let formData = new FormData()
-        console.log(files)
+        // console.log(files)
 
         if(files.length === 0){
             return alert('Please select minimum 1 file.')
@@ -117,6 +126,13 @@ function DragDropSection() {
         if(files.length > 20){
             return alert('Maximum 20 files are allowed')
         }
+
+        if(filesSize > 100*1024*1024){
+            setFileSizeError(true)
+            setValidInput(false)
+            return alert('Upload Error: Files size greater than 100 MB')
+        }
+
         
         if(files.length > 1){
             formData.append('expireLinkTime', exipreTime)
@@ -124,20 +140,35 @@ function DragDropSection() {
             for(let i in files){
                 formData.append('userFiles', files[i])
             }
-    
-            let res = await fetch('files/uploadFiles', {
-                method: 'POST',
-                body: formData
-            }) 
-    
-            let data = await res.json()
+            document.getElementById('disabledDiv').classList.add('disablesDivStyle')
+            try{
+                let res = await axios.post('files/uploadFiles', formData, {
+                    onUploadProgress: progressEvent => setProgress(Math.round( (progressEvent.loaded * 100) / progressEvent.total ))
+                }) 
+                if(res.status === 200){
+                    setProgress(0)
+                    document.getElementById('disabledDiv').classList.remove('disablesDivStyle')
+                    setResponse(res.data)
+                    setFiles([])
+                    setValidInput(undefined)
+                }
+                if(res.status === 500){
+                    alert('Internal Server Error. ')
+                }
+                console.log(res)
+            }catch(err){
+                console.log(err)
+            }
             
-            console.log(data)
+        }
+
+        if(files.length === 1){
+            //panding
         }
 
     }
     return (
-        <div className="dragDropSection">
+        <div className="dragDropSection" id="disabledDiv">
 
             <div onDragEnter={handelDragEnter} 
                 onDragOver={handelDragOver}
@@ -146,16 +177,16 @@ function DragDropSection() {
                 className={` dragZone ${validInput === true?  "dragEnterStyleOnValidInput" :validInput === false? "dragEnterStyleOnInvalidValidInput": "" }`}>
 
                 <h1 className="uploadIcon"><i className="bi bi-cloud-upload"></i></h1>
-                <h3>Drag and Drop file here.</h3>
+                <h3>Drag & Drop files here.</h3>
                 {fileSizeError? <small style={{color: 'red'}}>Upload Error: file Size Greater than 100 MB</small>: '' }
-                <small hidden>{filesSize}</small>
+                
                 {!fileSizeError && validInput && files.length !== 0? <small>Total Files are <b>{files.length} </b>Maximun allowed <b>20</b></small>: ''}
 
                 {validInput === false && !fileSizeError? <small style={{color: 'red'}}>Upload Error: Please Select files only</small>: ''}
             </div>
 
             <input type="file" name="userFiles" id="fileInput" hidden multiple onChange={fileInputHandeler}/>
-            <span id="dragSpan" onClick={() => document.getElementById("fileInput").click()}> browse files. </span>
+            <span id="dragSpan" onClick={() => document.getElementById("fileInput").click()}> Browse files. </span>
 
             <h6>Delete files from cloud after
                 <select name="expireLinkTime" value={exipreTime} onChange={handelSelection} className="expireTimeSelector">
@@ -166,9 +197,9 @@ function DragDropSection() {
                 </select> hours
             </h6>
 
-            {/* <div id="myProgress">
-                <div id="myBar">20%</div>
-            </div> */}
+            {progress !== 0? <div id="myProgress">
+                <div className="myBar" style={{width: `${progress}%`}}>{`${progress}%`}</div>
+            </div>: ''}
 
             <button id="uploadBtn" disabled={validInput && !fileSizeError? false: true} onClick={handelBtnClick}>upload files</button>
         </div>

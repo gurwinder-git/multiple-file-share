@@ -1,13 +1,17 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import '../../css/emailsection.css'
+import {responseContext} from '../../App'
 
 function EmailSection() {
+    //response context
+    let {response} = useContext(responseContext);
     return (
+        Object.keys(response).length !== 0?
         <div className="emailSection">
             <small>Copy Link</small>
             <div id="linkDiv">
-                <input value="http://share-file.com/download/7b6c384765c3b6583cb "type="text" name="dowloadLink" id="dowloadLink" disabled={true} />
-                <button className="copyBtn">copy link</button>
+                <input value={response.downloadFileLink} type="text" name="dowloadLink" id="dowloadLink" disabled={true} />
+                <button className="copyBtn" onClick={() =>  {navigator.clipboard.writeText(response.downloadFileLink); alert('Link copied to Clipboard')}}>copy link</button>
             </div>
                 
             <small>Or Send Mail</small>
@@ -22,7 +26,7 @@ function EmailSection() {
             </fieldset>
 
             <button id="mailBtn">Send mail</button>
-        </div>
+        </div>: ''
     )
 }
 

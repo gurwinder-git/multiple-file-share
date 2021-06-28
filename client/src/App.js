@@ -1,22 +1,28 @@
-import React from 'react';
+import React, {createContext, useState} from 'react';
 import Upload from './components/Upload';
 import Download from './components/Download';
 import './css/App.css';
 import {Switch, Route} from "react-router-dom";
 
-function App() {
-  return (<>
-        <Switch>
-            <Route exact path='/'>
-                <Upload/>
-            </Route>
+let responseContext = createContext()
 
-            <Route exact path='/download/:id'>
-                <Download/>
-            </Route>
-        </Switch>
+function App() {
+    let [response, setResponse] = useState({})
+    return (<>
+        <responseContext.Provider value={{response, setResponse}}>
+            <Switch>
+                <Route exact path='/'>
+                    <Upload/>
+                </Route>
+
+                <Route exact path='/download/:id'>
+                    <Download/>
+                </Route>
+            </Switch>
+        </responseContext.Provider>
     </>
   );
 }
 
 export default App;
+export {responseContext};

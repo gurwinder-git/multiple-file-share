@@ -8,7 +8,7 @@ function LeftDiv() {
         <div className="leftDiv">
             <div className="fileShareAndEmail">
                 <DragDropSection/>
-                {/* <EmailSection/> */}
+                <EmailSection/>
             </div>
         </div>
     )
