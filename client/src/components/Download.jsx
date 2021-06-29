@@ -73,7 +73,7 @@ function Download() {
 
                 <div className="btns">
                     {response.isVideo? <button onClick={() => setVideoPlayer(true)}>Play online</button>: null}
-                    <a href={`${response.downloadLink}`}><button>Download files</button></a>
+                    <a href={`${response.downloadLink}`} download><button>Download files</button></a>
                 </div>
                 {videoPlayer? <div className="video">
                     <div className="close">

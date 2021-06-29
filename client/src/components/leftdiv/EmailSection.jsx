@@ -1,5 +1,5 @@
 import React, {useContext} from 'react'
-import '../../css/emailsection.css'
+import '../../css/emailsection.css' 
 import {responseContext} from '../../App'
 
 function EmailSection() {
@@ -14,7 +14,7 @@ function EmailSection() {
                 <button className="copyBtn" onClick={() =>  {navigator.clipboard.writeText(response.downloadFileLink); alert('Link copied to Clipboard')}}>copy link</button>
             </div>
                 
-            <small>Or Send Mail</small>
+            {/* <small>Or Send Mail</small>
             <fieldset>
                 <legend>Your Email:</legend>
                 <input type="email" name="senderEmail" autoFocus={true}/>
@@ -25,7 +25,7 @@ function EmailSection() {
                 <input type="email" name="receiverEmail"/>
             </fieldset>
 
-            <button id="mailBtn">Send mail</button>
+            <button id="mailBtn">Send mail</button> */}
         </div>: ''
     )
 }
