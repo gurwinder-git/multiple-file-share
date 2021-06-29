@@ -10,7 +10,7 @@ function DragDropSection() {
     let [files, setFiles] = useState([])
     let [filesSize, setFilesSize] = useState(0)
     let [fileSizeError, setFileSizeError] = useState(false)
-    let [exipreTime, setExipreTime] = useState(5)
+    let [exipreTime, setExipreTime] = useState(1)
     let [progress, setProgress] = useState(0)
 
     //response context
@@ -163,7 +163,31 @@ function DragDropSection() {
         }
 
         if(files.length === 1){
-            //panding
+            formData.append('expireLinkTime', exipreTime)
+
+            for(let i in files){
+                formData.append('userFile', files[i])
+            }
+
+            document.getElementById('disabledDiv').classList.add('disablesDivStyle')
+            try{
+                let res = await axios.post('file/uploadFile', formData, {
+                    onUploadProgress: progressEvent => setProgress(Math.round( (progressEvent.loaded * 100) / progressEvent.total ))
+                }) 
+                if(res.status === 200){
+                    setProgress(0)
+                    document.getElementById('disabledDiv').classList.remove('disablesDivStyle')
+                    setResponse(res.data)
+                    setFiles([])
+                    setValidInput(undefined)
+                }
+                if(res.status === 500){
+                    alert('Internal Server Error. ')
+                }
+                console.log(res)
+            }catch(err){
+                console.log(err)
+            }
         }
 
     }
@@ -190,6 +214,7 @@ function DragDropSection() {
 
             <h6>Delete files from cloud after
                 <select name="expireLinkTime" value={exipreTime} onChange={handelSelection} className="expireTimeSelector">
+                    <option value="1">1</option>
                     <option value="5">5</option>
                     <option value="10">10</option>
                     <option value="15">15</option>

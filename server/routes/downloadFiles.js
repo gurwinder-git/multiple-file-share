@@ -8,17 +8,19 @@ downloadRouter.get('/:id', async (req, res) => {
     try{
         const result = await FileModel.findOne({_id: req.params.id})
 
-        let {fileName, path, size, linkExpireAt} = result
-
         if(!result){
             return res.status(404).json({error: 'File not found'});
         }
+
+        let {fileName, path, size, linkExpireAt, isVideo} = result
+
         res.status(200).json({
             fileName: fileName,
             downloadLink: `${process.env.APP_BASE_URL}/${path}`,
             size: size,
             timeLeftToExpireLink: linkExpireAt - Date.now(),
-            linkWillExpireAt: linkExpireAt
+            linkWillExpireAt: linkExpireAt,
+            isVideo
         })
     }
     catch(err){

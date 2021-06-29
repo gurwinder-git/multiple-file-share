@@ -24,6 +24,10 @@ const fileSchema = new mongoose.Schema({
     receiver: {
         type: String,
         required: false
+    },
+    isVideo: {
+        type: Boolean,
+        default: false
     }
 
 }, {timestamps: true})

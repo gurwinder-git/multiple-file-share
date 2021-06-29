@@ -1,0 +1,89 @@
+div#downloadDiv {
+    width: 50%;
+    border: 1px dashed #ababab;
+    margin: 1em auto;
+    text-align: center;
+    border-radius: .5em;
+    background-color: #292929;
+    padding-bottom: 15px;
+}
+
+h3.logo {
+    display: flex;
+    align-items: center;
+    padding: 1em 3em;
+    letter-spacing: 1px;
+    background-color: rgb(41, 41, 41);
+}
+
+i.bi.bi-download {
+    font-size: 2.5em;
+    color: whitesmoke;
+}
+
+.timeDetailes {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #929292;
+    width: 41%;
+    background-color: #8c8c8c3d;
+    margin: 10px auto;
+    padding-bottom: 9px;
+}
+
+
+
+.btns button {
+    width: 14em;
+    background-color: #595959;
+    outline: none;
+    border: none;
+    color: whitesmoke;
+    text-transform: uppercase;
+    padding: 5px 13px;
+    margin: 20px 10px 0px 10px;
+    cursor: pointer;
+    transition: 150ms ease-in-out;
+}
+
+.btns button:hover{
+    width: 15em;
+    opacity: 0.7;
+    transition: 150ms ease-in-out;
+}
+
+.btns button:active{
+    border: 1px solid rgb(148, 148, 148);
+}
+
+.video {
+    position: absolute;
+    top: 0em;
+    left: 0px;
+    width: 100%;
+    /* text-align: center; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-content: stretch;
+    justify-content: space-evenly;
+    height: 100vh;
+    background: #000000ab;
+}
+
+video {
+    width: auto;
+    height: 80%;
+}
+.close {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    cursor: pointer;
+    /* color: brown; */
+    align-items: flex-end;
+    /* position: relative; */
+    /* right: -33em; */
+    width: 100%;
+    padding-right: 50px;
+}
