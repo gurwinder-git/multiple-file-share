@@ -6,7 +6,7 @@ import path from 'path'
 const uploadFileRouter = express.Router()
 
 uploadFileRouter.post('/uploadFile', async (req, res) => {
-    console.log(req.files.userFile)
+    // console.log(req.files.userFile)
 
     const userFile = req.files.userFile;
     const expireLinkTime = req.body.expireLinkTime
@@ -24,13 +24,13 @@ uploadFileRouter.post('/uploadFile', async (req, res) => {
     let uniqueName = ''
     let filePath = ''
     let isItVideo = undefined
-    if(fileType.includes('video') || fileExtension === 'mp4' || '3gp' || 'mkv' || 'MKV'){
+    if(fileType.includes('video') || fileExtension === '.mp4' || fileExtension === '.3gp' || fileExtension === '.mkv' || fileExtension === '.MKV' || fileExtension === '.mp3'){
         uniqueName = `${Date.now()}_${userFile.name}`;
         filePath = uniqueName;
         isItVideo = true
     }else{
         uniqueName = `${Date.now()}_${userFile.name}`;
-        filepath = uniqueName;
+        filePath = uniqueName;
         isItVideo = false
     }
 

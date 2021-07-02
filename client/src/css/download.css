@@ -87,3 +87,22 @@ video {
     width: 100%;
     padding-right: 50px;
 }
+
+.errorDiv {
+    width: 50%;
+    border: 1px solid gray;
+    margin: 10px auto;
+    text-align: center;
+    background: #292929;
+    padding: 45px;
+}
+
+i.bi.bi-exclamation-octagon-fill {
+    font-size: 5em;
+    opacity: 0.3;
+}
+h3.errorMessage {
+    font-size: x-large;
+    opacity: .7;
+    /* color: red; */
+}

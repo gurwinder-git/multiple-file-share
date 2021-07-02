@@ -13,7 +13,7 @@ function Download() {
         try {
             const res = await axios.get(`/download/${id}`)
             if(res.status === 200){
-                console.log(res.data)
+                // console.log(res.data)
                 let {downloadLink, fileName, linkWillExpireAt, size, timeLeftToExpireLink, isVideo} = res.data
 
                 linkWillExpireAt = new Date(linkWillExpireAt).toLocaleString()
@@ -36,13 +36,12 @@ function Download() {
 
                 setResponse({ downloadLink, fileName, linkWillExpireAt, size, timeLeftToExpireLink, isVideo })
             }
-            if(res.status === 404){
+            if(res.status === 202){
                 console.log(res.data)
                 setError(true)
             }
             if(res.status === 500){
                 console.log('Internal Server error')
-                setError(true)
             }
             
         } catch (err) {
@@ -86,7 +85,12 @@ function Download() {
                     </video>
                 </div>: ''}
                 
-            </div>: 'Please wait...'}
+            </div>: !error? 'Please wait...': ''}
+
+            {error? <div className='errorDiv'>
+                <i className="bi bi-exclamation-octagon-fill"></i>
+                <h3 className="errorMessage">Link Expired !</h3>
+            </div>: null}
         </>
     )
 }
