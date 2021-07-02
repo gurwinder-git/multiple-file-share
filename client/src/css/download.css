@@ -106,3 +106,8 @@ h3.errorMessage {
     opacity: .7;
     /* color: red; */
 }
+
+.logoLink{
+    text-decoration: none;
+    color: whitesmoke;
+}

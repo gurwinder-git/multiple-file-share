@@ -17,3 +17,7 @@ h3.logo {
     background-color: rgb(41, 41, 41);
 }
 
+.logoLink{
+    text-decoration: none;
+    color: whitesmoke;
+}

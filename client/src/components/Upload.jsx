@@ -7,7 +7,7 @@ function Upload() {
     return (
         <div id="uploadDiv">
             <h3 className="logo">
-                Share-Files
+                <a href="/" className="logoLink">Share-Files</a> 
             </h3>
             <div className="main">
                 <LeftDiv/>

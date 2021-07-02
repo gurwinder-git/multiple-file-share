@@ -55,7 +55,7 @@ function Download() {
     return (
         <>
             <h3 className="logo">
-                Share-Files
+                <a href="/" className="logoLink">Share-Files</a> 
             </h3>
             { Object.keys(response).length !== 0?
             <div id="downloadDiv">
@@ -78,7 +78,7 @@ function Download() {
                     <div className="close">
                         <i className="bi bi-x-lg" onClick={() => setVideoPlayer(false)}></i>
                     </div>
-                    <video width="320" height="240" controls>
+                    <video controls>
                         <source src={`${response.downloadLink}`} type="video/mp4"/>
                         <source src={`${response.downloadLink}`} type="video/ogg"/>
                         Your browser does not support the video tag.

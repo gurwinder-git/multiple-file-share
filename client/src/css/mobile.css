@@ -1,0 +1,25 @@
+@media only screen and (max-width: 800px) {
+    .rightDiv{
+        display: none;
+    }
+    .leftDiv {
+        width: 100%;
+    }
+
+    div#downloadDiv {
+        width: 95%;
+    }
+
+    .timeDetailes {
+        width: 79%;
+    }
+
+    video {
+        width: 80%;
+        height: 80%;
+    }
+
+    .copyBtn {
+        width: 7em;
+    }
+  }
