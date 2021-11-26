@@ -3,7 +3,7 @@ import router from './routes/postFiles.js'
 import fileUpload from 'express-fileupload'
 import dotenv from 'dotenv'
 import connectDB from './config/db.js'
-import {downloadRouter} from './routes/downloadFiles.js'
+import { downloadRouter } from './routes/downloadFiles.js'
 import uploadFileRouter from './routes/postFile.js'
 
 dotenv.config()
